@@ -1,3 +1,12 @@
+# подробной обработки исключительных ситуаций здесь нет
+
+# где-то сделано не совсем, как требуется в задании, например, при перемещении документа
+# нет смысла спрашивать у пользователя номер полки, если номер документа уже введен некорректно
+
+# осознанно оставил дублирование кода для выводимых сообщений плюс для более сложных функция
+# логика не всегда инкапсулирована в функции - например, часть проверок делается при считывании входных данных
+# в функции perform_command; все-таки, думаю, в таком задании это допустимо
+
 documents = [
     {'type': 'passport', 'number': '2207 876234', 'name': 'Василий Гупкин'},
     {'type': 'invoice', 'number': '11-2', 'name': 'Геннадий Покемонов'},
@@ -99,6 +108,17 @@ def d(doc_id):
     l()
 
 
+def m(doc_id, shelf):
+    current_shelf = find_shelf_by_doc_id(doc_id)
+    if current_shelf == shelf:
+        print(f'Документ {doc_id} уже находится на полке {shelf}!')
+    else:
+        directories[current_shelf].remove(doc_id)
+        directories[shelf].append(doc_id)
+        print('Документ перемещен.')
+    l()
+
+
 def perform_command(command):
     if command == 'p':
         print('Введите номер документа:')
@@ -130,6 +150,20 @@ def perform_command(command):
     elif command == 'd':
         print('Введите номер документа:')
         d(input())
+    elif command == 'm':
+        print('Введите номер документа:')
+        doc_id = input()
+        if get_doc_by_id(doc_id) is None:
+            print('Документ не найден в базе.')
+            l()
+        else:
+            print('Введите номер полки:')
+            shelf = input()
+            if shelf not in directories:
+                print('Такой полки не существует. ')
+                print_shelves_list()
+            else:
+                m(doc_id, shelf)
     else:
         print('Неизвестная команда!')
 
