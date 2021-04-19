@@ -1,0 +1,6 @@
+{"user_id": "user_id", "category": "category"}
+{"user_id": "6450655ae8", "category": "Продукты"}
+{"user_id": "b4ea53e670", "category": "Электроника"}
+{"user_id": "0e37347152", "category": "Электроника"}
+{"user_id": "e53fe4ca72", "category": "Бытовая техника"}
+{"user_id": "d94b908660", "category": "Электроника"}
